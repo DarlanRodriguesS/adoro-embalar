@@ -36,23 +36,11 @@
       })
       .then((resp) => resp.json())
       .then((data) => {
-          document.querySelector('.orders .loading').remove();
-          data.forEach(order => {
-            document.querySelector('.orders').innerHTML += `<div class="order"><div>${order.code}</div><div>${order.date}</div></div>`;
-          });
+          document.querySelector('body').innerHTML += `<div class="order"><div>${data.at(-1).code}</div></div>`;
       })
       .catch(function (error) {
           console.log(error);
       });
-
-function simulateTab() {
-    var TAB_KEY = 9;    
-    var keyboardEvent = document.createEvent("KeyboardEvent");
-    var initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
-    keyboardEvent[initMethod]("keydown", true, true, window, 0, 0, 0, 0, 0, TAB_KEY);
-    document.dispatchEvent(keyboardEvent);
-  }
-  
     function createOrder() {
       fetch('http://localhost:3000/create-order', {
           method: 'POST',
@@ -80,9 +68,7 @@ function simulateTab() {
 
     }
 
-    document.addEventListener("DOMContentLoaded", function(event) {
-      simulateTab();
-    });
+
     
     document.querySelector('body').addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
