@@ -27,8 +27,8 @@
         border-radius: 8px;
         box-shadow: 1px 1px 2px #000;
         display: flex;
+        justify-content: space-between;
         align-items:center;
-        justify-content:;
         text-align: center;
         background-color: aliceblue;
       }
@@ -36,13 +36,8 @@
     <title>Adoro Embalar</title>
   </head>
   <body>
-    <table>
-      <tr>
-       
-      
-    </table>
     <div class="orders">
-      <div class="loading"><img src="./picture/loading.gif"</div>
+      <div class="loading"><img src="./picture/loading.gif"></div>
     </div>
 
 
@@ -58,7 +53,7 @@
       .then((data) => {
           document.querySelector('.orders .loading').remove();
           data.forEach(order => {
-            document.querySelector('.orders').innerHTML += `<div class="order"> <table> <tr><td>${order.code}</td><td>${order.date} </td></tr> </table></div>`;
+            document.querySelector('.orders').innerHTML += `<div class="order"><div>${order.code}</div><div>${order.date}</div></div>`;
           });
       })
       .catch(function (error) {
