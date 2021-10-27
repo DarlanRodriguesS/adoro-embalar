@@ -36,6 +36,20 @@ router.get("/orders", async (req, res) => {
   try {
     const orders = await Order.find();
 
+    // const orders = [
+    //     {
+    //         code: "123",
+    //         date: moment().format("12/02/2001"),
+    //     },
+    //     {
+    //         code: "321",
+    //         date: moment().format("12/02/2001"),
+    //     },
+    //     {
+    //         code: "444",
+    //         date: moment().format("12/02/2001"),
+    //     },
+    // ]
     const formatedOrders = [];
 
     orders.map((order) => {
