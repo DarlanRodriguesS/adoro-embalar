@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles/fontawesome.min.css">
+  <style>
+
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../fonts/fa-solid-900.eot");
+  src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"), url("../fonts/fa-solid-900.ttf") format("truetype"), url("../fonts/fa-solid-900.svg#fontawesome") format("svg"); }
+
+.fa,
+.fas {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900; }
+  html{
+    font-size: 50px;
+  }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background-color: #FFCCDC;
+      overflow: hidden;
+      flex-direction: column;
+      -webkit-touch-callout: none;
+      /* iOS Safari */
+      -webkit-user-select: none;
+      /* Safari */
+      -khtml-user-select: none;
+      /* Konqueror HTML */
+      -moz-user-select: none;
+      /* Old versions of Firefox */
+      -ms-user-select: none;
+      /* Internet Explorer/Edge */
+      user-select: none;
+    }
+
+    input {
+      border: none;
+    }
+
+
+    button {
+      display: block;
+    }
+
+
+    .focused .orders {
+      display: none;
+    }
+
+    .orders {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 20px;
+
+    }
+
+    .not-last {
+      column-gap: 20px;
+    }
+
+    .order {
+      border-radius: 20px;
+      border-color: #000;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      box-shadow: 0 1px 4px rgb(68 68 68 / 20%);
+      margin-bottom: 10px ;
+    }
+
+    .order h2 {
+      margin: 0;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 5.9rem;
+      text-align: center;
+
+
+    }
+
+    .order:not(.last) h2 {
+      font-size: 1rem;
+      column-gap: 20px;
+    }
+
+    .addOrder {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .formWrapper  {
+      position: relative;
+
+    }
+
+    .formWrapper input {
+      height: 40px;
+      width: 300px;
+      border-radius: 10px;
+      outline: none;
+      transform: translateY(-15px);
+    }
+
+    .formWrapper button {
+    font-size: 0.5rem;
+     position: absolute;
+     right: 8px;
+     background-color: transparent;
+     border: 0;
+     top: 50%;
+     transform: translateY(-50%);
+
+    }
+
+    @media (max-height: 400px){
+      .orders{
+        display: none;
+      }
+      .formWrapper input {
+      
+      transform: translateY(100px) scale(2);
+    }
+
+    .formWrapper button {
+    font-size: 1rem; 
+     position: absolute;
+     right: -130px;
+     background-color: transparent;
+     border: 0;
+     top: 50%;
+     transform: translateY(146%);
+
+    }
+    
+    }
+
+  </style>
+  <title>Adoro Embalar</title>
+</head>
+
+<body>
+  <div class="addOrder">
+    <div class='formWrapper'>
+      <input type="text">
+      <button onclick="createOrder()"><i class="fas fa-plus"></i></button>
+    </div>
+  </div>
+
+  <div class="orders">
+    <div class="order last">
+      <h2>132456</h2>  </div>
+    <div class="order penultimate">
+      <h2>132456</h2>
+    </div>
+    <div class="order antepenultimate">
+      <h2>132456</h2>
+    </div>
+  </div>
+
+
+
+  <script>
+    function loadOrders() {
+      fetch('https://horrible-horse-79.loca.lt/orders', {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+          document.querySelector('.order.last h2').innerHTML = `${data.at(-1).code}`;
+          document.querySelector('.order.penultimate h2').innerHTML = `${data.at(-2).code}`;
+          document.querySelector('.order.antepenultimate h2').innerHTML = `${data.at(-3).code}`;
+        })
+
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadOrders();
+    });
+
+
+    function createOrder() {
+      fetch('https://horrible-horse-79.loca.lt/create-order', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            code: document.querySelector("input").value
+          })
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.error)
+          } else {
+            document.querySelector('input').focus();
+            document.querySelector('input').value = '';
+            loadOrders();
+          }
+
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    document.querySelector('body').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        document.querySelector('input').click();
+        createOrder()
+      }
+    });
+  </script>
+</body>
+
+</html>

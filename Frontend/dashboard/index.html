@@ -1,66 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      body{
-        margin: 0;
-        padding: 0;        
-        min-height: 100vh;
-        background-color: #FFCCDC;
-      }
 
-      .orders{
-        width: 500px;
-        margin: 60px auto 200px auto;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        background-color: rgba(255, 255, 255, 0.952);
-        padding: 450px;
-        border-radius: 8px;
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #FFCCDC;
+    }
 
-    
-      .order{
-        border-radius: 8px;
-        border-bottom: 1px solid #000;
-        display: flex;
-        justify-content: space-between;
-        background-color: rgba(255, 255, 255, 0.952);
-      }
-    </style>
-    <title>Adoro Embalar</title>
-  </head>
-  <body>
-    <div class="orders">
-      <div class="loading"><img src="../public/picture/loading.gif"></div>
-    </div>
+    .orders {
+      width: 500px;
+      margin: 60px auto 200px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: rgba(255, 255, 255, 0.952);
+      padding: 450px;
+      border-radius: 8px;
+    }
 
 
-   <script>
-     fetch('http://localhost:3000/orders', {
-       method: 'GET',
-       headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json'
+    .order {
+      border-radius: 8px;
+      border-bottom: 1px solid #000;
+      display: flex;
+      justify-content: space-between;
+      background-color: rgba(255, 255, 255, 0.952);
+    }
+  </style>
+  <title>Adoro Embalar</title>
+</head>
+
+<body>
+  <div class="orders">
+    <div class="loading"><img src="../public/picture/loading.gif"></div>
+  </div>
+
+
+  <script>
+    fetch('http://localhost:3000/orders', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         }
       })
       .then((resp) => resp.json())
       .then((data) => {
-          document.querySelector('.orders .loading').remove();
-          data.forEach(order => {
-            document.querySelector('.orders').innerHTML += 
+        document.querySelector('.orders .loading').remove();
+        data.forEach(order => {
+          document.querySelector('.orders').innerHTML +=
             `<div class="order">
                 <div>${order.code}</div>
                 <div>${order.date}</div>
             </div>`;
-          });
+        });
       })
       .catch(function (error) {
-          console.log(error);
+        console.log(error);
       });
-   </script>
-  </body>
+  </script>
+</body>
+
 </html>
