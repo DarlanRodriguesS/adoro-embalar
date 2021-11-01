@@ -47,11 +47,6 @@
       user-select: none;
     }
 
-    input {
-      border: none;
-    }
-
-
     button {
       display: block;
     }
@@ -92,8 +87,6 @@
       font-family: Arial, Helvetica, sans-serif;
       font-size: 5.9rem;
       text-align: center;
-
-
     }
 
     .order:not(.last) h2 {
@@ -107,22 +100,27 @@
       flex-direction: column;
     }
     .formWrapper  {
-      position: relative;
+      display: block;
+      position: fixed;
+      margin: 200px auto;
 
     }
 
     .formWrapper input {
-      height: 40px;
-      width: 300px;
-      border-radius: 10px;
+      border: none;
+      display: block;
+      width: 0px;
+      height: 0px;
       outline: none;
       transform: translateY(-15px);
+      opacity: 0%;
     }
 
     .formWrapper button {
     font-size: 0.5rem;
      position: absolute;
      right: 8px;
+     display: none;
      background-color: transparent;
      border: 0;
      top: 50%;
@@ -130,12 +128,26 @@
 
     }
 
-    @media (max-height: 400px){
+    .cancelWrapper{
+      display: none;
+    }
+
+    div.addOrderManual button {
+     font-size: 0.5rem;
+     height: 50px;
+     background-color: #fff;
+     border: 0;
+     margin: 10px auto;
+     border-radius: 8px;
+
+    }
+
+    /* @media (max-height: 400px){
       .orders{
         display: none;
       }
       .formWrapper input {
-      
+
       transform: translateY(100px) scale(2);
     }
 
@@ -150,6 +162,22 @@
 
     }
     
+    } */
+
+
+    body.addOrderManual .addOrderManual, body.addOrderManual .orders{
+      display: none;
+    }
+
+    body.addOrderManual .formWrapper button, body.addOrderManual .cancelWrapper {
+      display: block;
+    }
+
+
+    body.addOrderManual .formWrapper input {
+      height: 40px;
+      opacity: 40%;
+      width: 300px;
     }
 
   </style>
@@ -161,6 +189,12 @@
     <div class='formWrapper'>
       <input type="text">
       <button onclick="createOrder()"><i class="fas fa-plus"></i></button>
+    </div>
+    <div class="addOrderManual">
+      <button onclick="changeToManualState()">Adicionar pedido manualmente</i></button>
+    </div>
+    <div class='cancelWrapper'>
+      <button onclick="changeToAutoState()">Cancelar</button>
     </div>
   </div>
 
@@ -178,8 +212,21 @@
 
 
   <script>
+
+const urlLocalTunel = 'http://horrible-horse-79.loca';
+const urlLocalHost = 'http://localhost:3000';
+
+
+function changeToManualState(){
+  document.querySelector('body').classList.add('addOrderManual');
+}
+
+function changeToAutoState(){
+  document.querySelector('body').classList.remove('addOrderManual');
+}
+
     function loadOrders() {
-      fetch('https://horrible-horse-79.loca.lt/orders', {
+      fetch(`${urlLocalHost}/orders`, {
           method: 'GET',
           headers: {
             'Accept': 'application/json',
@@ -202,9 +249,8 @@
       loadOrders();
     });
 
-
     function createOrder() {
-      fetch('https://horrible-horse-79.loca.lt/create-order', {
+      fetch(`${urlLocalHost}/create-order`, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
