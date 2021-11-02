@@ -6,22 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../styles/fontawesome.min.css">
   <style>
+    @font-face {
+      font-family: 'Font Awesome 5 Free';
+      font-style: normal;
+      font-weight: 900;
+      font-display: block;
+      src: url("../fonts/fa-solid-900.eot");
+      src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"), url("../fonts/fa-solid-900.ttf") format("truetype"), url("../fonts/fa-solid-900.svg#fontawesome") format("svg");
+    }
 
-@font-face {
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-weight: 900;
-  font-display: block;
-  src: url("../fonts/fa-solid-900.eot");
-  src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"), url("../fonts/fa-solid-900.ttf") format("truetype"), url("../fonts/fa-solid-900.svg#fontawesome") format("svg"); }
+    .fa,
+    .fas {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+    }
 
-.fa,
-.fas {
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900; }
-  html{
-    font-size: 50px;
-  }
+    html {
+      font-size: 50px;
+    }
 
     body {
       margin: 0;
@@ -78,7 +80,7 @@
       justify-content: center;
       background-color: #000;
       box-shadow: 0 1px 4px rgb(68 68 68 / 20%);
-      margin-bottom: 10px ;
+      margin-bottom: 10px;
     }
 
     .order h2 {
@@ -99,14 +101,18 @@
       align-items: center;
       flex-direction: column;
     }
-    .formWrapper  {
+
+    .formWrapper {
       display: block;
       position: fixed;
-      margin: 200px auto;
+      margin: 100px auto;
 
     }
 
     .formWrapper input {
+      margin-top: 300px;
+      font-size: 40px;
+      padding-left: 20px;
       border: none;
       display: block;
       width: 0px;
@@ -117,113 +123,130 @@
     }
 
     .formWrapper button {
-    font-size: 0.5rem;
-     position: absolute;
-     right: 8px;
-     display: none;
-     background-color: transparent;
-     border: 0;
-     top: 50%;
-     transform: translateY(-50%);
+      margin-top: 195px;
+      font-size: 0.7rem;
+      position: absolute;
+      right: 8px;
+      display: none;
+      background-color: transparent;
+      border: 0;
+      top: 35%;
+      transform: translateY(-50%);
 
     }
 
-    .cancelWrapper{
+    .cancelWrapper {
       display: none;
     }
 
     div.addOrderManual button {
-     font-size: 0.5rem;
-     height: 50px;
-     background-color: #fff;
-     border: 0;
-     margin: 10px auto;
-     border-radius: 8px;
+      font-size: 0.5rem;
+      height: 50px;
+      background-color: #fff;
+      border: 0;
+      margin: 10px auto;
+      border-radius: 8px;
 
     }
 
-    /* @media (max-height: 400px){
-      .orders{
-        display: none;
-      }
-      .formWrapper input {
-
-      transform: translateY(100px) scale(2);
-    }
-
-    .formWrapper button {
-    font-size: 1rem; 
-     position: absolute;
-     right: -130px;
-     background-color: transparent;
-     border: 0;
-     top: 50%;
-     transform: translateY(146%);
-
-    }
     
-    } */
 
 
-    body.addOrderManual .addOrderManual, body.addOrderManual .orders{
+
+    body.addOrderManual .addOrderManual,
+    body.addOrderManual .orders {
       display: none;
     }
 
-    body.addOrderManual .formWrapper button, body.addOrderManual .cancelWrapper {
+    body.addOrderManual .formWrapper button,
+    body.addOrderManual .cancelWrapper {
+
       display: block;
+
+    }
+
+    /* Estilo do botão de cancelar */
+    body.addOrderManual .cancelWrapper button {
+      display: block;
+      font-size: 0.5rem;
+      height: 50px;
+      margin-top: 490px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    /* Estilo do input de cadastro manual */
+    body.addOrderManual .formWrapper input {
+      height: 80px;
+      opacity: 100%;
+      width: 600px;
+      border-radius: 15px;
     }
 
 
-    body.addOrderManual .formWrapper input {
-      height: 40px;
-      opacity: 40%;
-      width: 300px;
+    @media (max-height: 400px) {
+      body.addOrderManual .cancelWrapper button {
+        margin-top: 490px 0px 0px 0px;
+        margin: 180px auto;
+      }
+
+      .formWrapper button {
+        margin-top: 0px;
+
+      }
+
+      .formWrapper input {
+
+        margin-top: 0px;
+      }
+
     }
 
   </style>
   <title>Adoro Embalar</title>
 </head>
+<!-- class='addOrderManual' -->
 
-<body>
+<body >
   <div class="addOrder">
     <div class='formWrapper'>
-      <input type="text">
+      <input id="textfield1" type="text">
       <button onclick="createOrder()"><i class="fas fa-plus"></i></button>
-    </div>
-    <div class="addOrderManual">
-      <button onclick="changeToManualState()">Adicionar pedido manualmente</i></button>
     </div>
     <div class='cancelWrapper'>
       <button onclick="changeToAutoState()">Cancelar</button>
     </div>
   </div>
-
+  <div class="addOrderManual">
+    <button onclick="changeToManualState()">Adicionar pedido manualmente</i></button>
+  </div>
   <div class="orders">
     <div class="order last">
-      <h2>132456</h2>  </div>
+      <h2>------</h2>
+    </div>
     <div class="order penultimate">
-      <h2>132456</h2>
+      <h2>------</h2>
     </div>
     <div class="order antepenultimate">
-      <h2>132456</h2>
+      <h2>------</h2>
     </div>
   </div>
 
 
 
   <script>
+    const urlLocalTunel = 'http://horrible-horse-79.loca';
+    const urlLocalHost = 'http://localhost:3000';
 
-const urlLocalTunel = 'http://horrible-horse-79.loca';
-const urlLocalHost = 'http://localhost:3000';
 
+    function changeToManualState() {
+      document.querySelector('body').classList.add('addOrderManual');
+    }
 
-function changeToManualState(){
-  document.querySelector('body').classList.add('addOrderManual');
-}
-
-function changeToAutoState(){
-  document.querySelector('body').classList.remove('addOrderManual');
-}
+    function changeToAutoState() {
+      document.querySelector('body').classList.remove('addOrderManual');
+      document.getElementById("textfield1").value = "";
+    }
 
     function loadOrders() {
       fetch(`${urlLocalHost}/orders`, {
@@ -274,6 +297,8 @@ function changeToAutoState(){
         .catch(function (error) {
           console.log(error);
         });
+
+      document.querySelector('body').classList.remove('addOrderManual');
     }
 
     document.querySelector('body').addEventListener('keypress', function (e) {
