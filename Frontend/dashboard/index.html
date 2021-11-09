@@ -4,37 +4,107 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../styles/fontawesome.min.css">
   <style>
+    @font-face {
+      font-family: 'Font Awesome 5 Free';
+      font-style: normal;
+      font-weight: 900;
+      font-display: block;
+      src: url("../fonts/fa-solid-900.eot");
+      src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"), url("../fonts/fa-solid-900.ttf") format("truetype"), url("../fonts/fa-solid-900.svg#fontawesome") format("svg");
+    }
+
+    .fa,
+    .fas {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+    }
+
     body {
-      margin: 0;
-      padding: 0;
       min-height: 100vh;
       background-color: #FFCCDC;
+      overflow: hidden;
     }
 
     .orders {
       width: 900px;
-      margin: 60px 25%;
+      margin: 30px 25%;
       padding: 50px;
       flex-direction: column;
       background-color: rgba(255, 255, 255, 0.952);
       border-radius: 15px;
-
     }
 
     .divOrders {
-      background-color: red;
-      height: 100px;
+      height: 60px;
       margin-bottom: 90px;
+    }
+
+    .reverse {
+      display: flex;
+      flex-direction: column;
+      height: 500px;
+      overflow: auto;
 
     }
 
-    .divOrders input {
-      border: 10px solid black;
-      display: block;
-      margin-left: 10px;
-      margin-top: 10pxz;
+    .serchOrder {
+      display: flex;
+    }
 
+    .serchOrder input {
+      margin-left: 15%;
+      margin-right: 1%;
+      font-size: 37px;
+      padding: 0px 20px;
+      border: 2px solid #24262D;
+      background-color: rgba(230, 230, 230, 0.651);
+      border-radius: 10px;
+      display: block;
+      height: 50px;
+      width: 50%;
+      outline: none;
+      transform: translateY(-15px);
+    }
+
+    ::placeholder {
+      color: rgba(19, 18, 18, 0.212);
+      font-size: 37px;
+    }
+
+
+    .serchOrder button {
+      font-size: 20px;
+      border: 2px solid #24262D;
+      border-radius: 10px;
+      display: block;
+      height: 54px;
+      width: 7%;
+      transform: translateY(-15px);
+    }
+
+    .serchOrder button:hover {
+      transition: 0.7s;
+      background-color: #FFCCDC;
+    }
+
+    .serchOrder button:active {
+      transition: 0.1s;
+      background-color: #d8aab6;
+      transform: translateY(-13px);
+    }
+
+    .titleList {
+      padding-top: 25px;
+      border-bottom: 1px solid #000;
+      padding-right: 130px;
+      padding-left: 10px;
+      display: flex;
+      justify-content: space-between;
+      background-color: rgba(255, 255, 255, 0.952);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 23px
     }
 
     .order {
@@ -54,40 +124,51 @@
 <body>
   <div class="orders">
     <div class='divOrders'>
-      <input>
+      <div class="serchOrder">
+        <input placeholder="Ex:123456">
+        <button><i class="fas fa-search"></i></button>
+      </div>
 
-    <div class="loading"><img src="../public/picture/loading.gif"></div>
+      <div class='titleList'>
+        <h3>Pedido</h3>
+        <h3>Data/Hora</h3>
+      </div>
+      <div class="loading"><img src="../public/picture/loading.gif"></div>
 
 
 
-    <script>
-      fetch('http://localhost:3000/orders', {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        })
-        .then((resp) => resp.json())
-        .then((data) => {
-          document.querySelector('.orders .loading').remove();
-          data.forEach(order => {
-            document.querySelector('.orders').innerHTML +=
-              `
+      <script>
+        fetch('http://localhost:3000/orders', {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          })
+          .then((resp) => resp.json())
+          .then((data) => {
+            var dataReverse = data.reverse();
+
+            document.querySelector('.orders .loading').remove();
+            dataReverse.forEach(order => {
+              document.querySelector('.reverse').innerHTML +=
+                `
+
             <div class="order">
                 <div class='orderCode'>${order.code}</div>
                 <div class='dateCode'>${order.date}</div>
             </div>
             `;
 
+            });
+          })
+          .catch(function (error) {
+            console.log(error);
           });
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    </script>
+      </script>
+    </div>
+    <div class="reverse"></div>
   </div>
-</div>
 </body>
 
 </html>

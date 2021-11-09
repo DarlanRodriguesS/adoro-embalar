@@ -31,12 +31,12 @@ app.get('/', (req, res) => {
 
 //Entregar uma porta
 
-// const DB_user = process.env.DB_USER;
-// const DB_password = encodeURIComponent(process.env.DB_password)
+const DB_user = process.env.DB_USER;
+const DB_password = encodeURIComponent(process.env.DB_password)
 
-// mongoose.connect(`mongodb+srv://${DB_user}:${DB_password}@apicluster.zruzt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${DB_user}:${DB_password}@apicluster.zruzt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
 
-mongoose.connect(`mongodb://127.0.0.1:27017`)
+// mongoose.connect(`mongodb://127.0.0.1:27017`)
 
 
     .then(() => {

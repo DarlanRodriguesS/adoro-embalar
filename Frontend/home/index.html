@@ -210,10 +210,10 @@
 </head>
 <!-- class='addOrderManual' -->
 
-<body class='addOrderManual'>
+<body>
   <div class="addOrder">
     <div class='formWrapper'>
-      <input id="textfield1" type="text">
+      <input id="addOrderButton" type="text">
       <button onclick="createOrder()"><i class="fas fa-plus"></i></button>
     </div>
     <div class='cancelWrapper'>
@@ -247,7 +247,7 @@
 
     function changeToAutoState() {
       document.querySelector('body').classList.remove('addOrderManual');
-      document.getElementById("textfield1").value = "";
+      document.getElementById("addOrderButton").value = "";
     }
 
     function loadOrders() {
