@@ -65,7 +65,7 @@ router.get("/orders", async (req, res) => {
   }
 });
 // Consultar dado específico
-router.get("/order/:code", async (req, res) => {
+router.get('/orders/:code', async (req, res) => {
   const { code } = req.params;
 
   try {
@@ -80,7 +80,6 @@ router.get("/order/:code", async (req, res) => {
       code: order.code,
       date: moment(new Date(order.date)).format("DD/MM/YYYY - HH:mm:ss"),
     };
-
     res.status(200).json(formatedOrder);
   } catch (error) {
     res.status(500).json({ error: error });

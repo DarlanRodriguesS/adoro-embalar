@@ -27,6 +27,13 @@
       overflow: hidden;
     }
 
+    .box {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
     .orders {
       width: 900px;
       margin: 30px 25%;
@@ -117,57 +124,70 @@
       font-family: Arial, Helvetica, sans-serif;
       font-size: 25px
     }
+
+    .loading {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 25%;
+    }
   </style>
   <title>Adoro Embalar</title>
 </head>
 
 <body>
-  <div class="orders">
-    <div class='divOrders'>
-      <div class="serchOrder">
-        <input placeholder="Ex:123456">
-        <button><i class="fas fa-search"></i></button>
-      </div>
+  <div class="box">
+    <div class="orders">
+      <div class='divOrders'>
+        <div class="serchOrder">
+          <input placeholder="Ex:123456" id='isearch'>
+          <button type="submit" id='bsearch'><i class="fas fa-search"></i></button>
+        </div>
 
-      <div class='titleList'>
-        <h3>Pedido</h3>
-        <h3>Data/Hora</h3>
-      </div>
-      <div class="loading"><img src="../public/picture/loading.gif"></div>
+        <div class='titleList'>
+          <h3>Pedido</h3>
+          <h3>Data/Hora</h3>
+        </div>
+        <div class="loading"><img src="../public/picture/loading.gif" width="100" height="100"></div>
+        <script>
+          var url = `http://localhost:3000/orders/`;
 
+          fetch(url, {
+              method: 'GET',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }
+            })
+            
+            .then((resp) => resp.json())
+            .then((data) => {
+              var dataReverse = data.reverse();
 
+              document.querySelector('.orders .loading').remove();
+              dataReverse.forEach(order => {console.log(order.code);
+                console.log(order.date);
 
-      <script>
-        fetch('http://localhost:3000/orders', {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-          })
-          .then((resp) => resp.json())
-          .then((data) => {
-            var dataReverse = data.reverse();
+                
+            //     document.querySelector('.reverse').innerHTML +=
+            //       `
 
-            document.querySelector('.orders .loading').remove();
-            dataReverse.forEach(order => {
-              document.querySelector('.reverse').innerHTML +=
-                `
+            // <div class="order">
+            //     <div class='orderCode'>${order.code}</div>
+            //     <div class='dateCode'>${order.date}</div>
+            // </div>
+            // `;
 
-            <div class="order">
-                <div class='orderCode'>${order.code}</div>
-                <div class='dateCode'>${order.date}</div>
-            </div>
-            `;
-
+              });
+            })
+            .catch(function (error) {
+              console.log(error);
             });
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      </script>
+        </script>
+      </div>
+      <div class="reverse"></div>
     </div>
-    <div class="reverse"></div>
   </div>
 </body>
 
