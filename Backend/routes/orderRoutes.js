@@ -65,26 +65,26 @@ router.get("/orders", async (req, res) => {
   }
 });
 // Consultar dado específico
-router.get('/orders/:code', async (req, res) => {
-  const { code } = req.params;
+// router.get('/orders/:code', async (req, res) => {
+//   const { code } = req.params;
 
-  try {
-    let order = await Order.findOne({ code });
+//   try {
+//     let order = await Order.findOne({ code });
 
-    //Esse ID ixiste?
-    if (!order) {
-      res.status(422).json({ error: "O pedido não foi encontrado!" });
-    }
+//     //Esse ID ixiste?
+//     if (!order) {
+//       res.status(422).json({ error: "O pedido não foi encontrado!" });
+//     }
 
-    let formatedOrder = {
-      code: order.code,
-      date: moment(new Date(order.date)).format("DD/MM/YYYY - HH:mm:ss"),
-    };
-    res.status(200).json(formatedOrder);
-  } catch (error) {
-    res.status(500).json({ error: error });
-  }
-});
+//     let formatedOrder = [{
+//       code: order.code,
+//       date: moment(new Date(order.date)).format("DD/MM/YYYY - HH:mm:ss"),
+//     }];
+//     res.status(200).json(formatedOrder);
+//   } catch (error) {
+//     res.status(500).json({ error: error });
+//   }
+// });
 
 // //atualizar os dados
 
