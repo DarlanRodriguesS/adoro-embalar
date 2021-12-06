@@ -14,6 +14,7 @@ router.post("/create-order", async (req, res) => {
 
   const order = {
     code,
+    date:Date.now()
   };
 
   const orderAlreadyExists = await Order.findOne({ code });

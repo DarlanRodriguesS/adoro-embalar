@@ -1,0 +1,200 @@
+    @font-face {
+      font-family: 'Font Awesome 5 Free';
+      font-style: normal;
+      font-weight: 900;
+      font-display: block;
+      src: url("../fonts/fa-solid-900.eot");
+      src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"), url("../fonts/fa-solid-900.ttf") format("truetype"), url("../fonts/fa-solid-900.svg#fontawesome") format("svg");
+    }
+
+    .fa,
+    .fas {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+    }
+
+    html {
+      font-size: 50px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background-color: #FFCCDC;
+      overflow: hidden;
+      flex-direction: column;
+      -webkit-touch-callout: none;
+      /* iOS Safari */
+      -webkit-user-select: none;
+      /* Safari */
+      -khtml-user-select: none;
+      /* Konqueror HTML */
+      -moz-user-select: none;
+      /* Old versions of Firefox */
+      -ms-user-select: none;
+      /* Internet Explorer/Edge */
+      user-select: none;
+    }
+
+    button {
+      display: block;
+    }
+
+
+    .focused .orders {
+      display: none;
+    }
+
+    .orders {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 20px;
+      
+    }
+
+    .not-last {
+      column-gap: 20px;
+    }
+
+    .order {
+      border-radius: 20px;
+      border-color: #000;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      box-shadow: 0 1px 4px rgb(68 68 68 / 20%);
+      margin-bottom: 10px;
+    }
+
+    .order h2 {
+      margin: 0;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 3.8rem;
+      text-align: center;
+    }
+
+    .order:not(.last) h2 {
+      font-size: 1rem;
+      column-gap: 20px;
+    }
+
+    .addOrder {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .formWrapper {
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .formWrapper input {
+
+      font-size: 40px;
+      padding-left: 20px;
+      border: none;
+      width: 0px;
+      height: 0px;
+      outline: none;
+      transform: translateY(-15px);
+      opacity: 0%;
+    }
+
+    .formWrapper button {
+      font-size: 0.7rem;
+      position: absolute;
+      display: none;
+      background-color: transparent;
+      border: 0;
+      transform: translateY(-50%);
+      top: 35%;
+      right: 10px;
+
+
+    }
+
+    .cancelWrapper {
+      display: none;
+    }
+
+    div.addOrderManual button {
+      font-size: 0.5rem;
+      height: 50px;
+      background-color: #fff;
+      border: 0;
+      margin: 10px auto;
+      border-radius: 8px;
+
+    }
+
+    .addOrderManual{
+      display: flex;
+      justify-content: center;
+      align-items: center ;
+    }
+
+
+
+    body.addOrderManual .addOrderManual,
+    body.addOrderManual .orders {
+      display: none;
+    }
+
+    body.addOrderManual .formWrapper button,
+    body.addOrderManual .cancelWrapper {
+
+      display: block;
+
+    }
+
+    /* Estilo do botão de cancelar */
+    body.addOrderManual .cancelWrapper button {
+      display: block;
+      font-size: 0.5rem;
+      height: 50px;
+      border-radius: 8px;
+      border: none;
+    }
+    
+    body.addOrderManual .cancelWrapper button :active {
+     border-style: dotted;
+    }
+
+    /* Estilo do input de cadastro manual */
+    body.addOrderManual .formWrapper input {
+      height: 80px;
+      opacity: 100%;
+      width: 600px;
+      border-radius: 15px;
+    }
+
+
+    /* @media (max-height: 400px) {
+      body.addOrderManual .cancelWrapper button {
+        margin-top: 490px 0px 0px 0px;
+        margin: 180px auto;
+      }
+
+      .formWrapper button {
+        margin-top: 0px;
+
+      }
+
+      .formWrapper input {
+
+        margin-top: 0px;
+      }
+
+    } */

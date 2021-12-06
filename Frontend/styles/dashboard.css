@@ -1,0 +1,133 @@
+     @font-face {
+      font-family: 'Font Awesome 5 Free';
+      font-style: normal;
+      font-weight: 900;
+      font-display: block;
+      src: url("../fonts/fa-solid-900.eot");
+      src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"), url("../fonts/fa-solid-900.ttf") format("truetype"), url("../fonts/fa-solid-900.svg#fontawesome") format("svg");
+    }
+
+    .fa,
+    .fas {
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: #FFCCDC;
+      overflow: hidden;
+    }
+
+    .box {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .orders {
+      width: 900px;
+      height: 750px;
+      margin: 30px 25%;
+      padding: 50px;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.952);
+      border-radius: 15px;
+    }
+
+    .divOrders {
+      height: 60px;
+      margin-bottom: 90px;
+    }
+
+    .reverse {
+      display: flex;
+      flex-direction: column;
+      height: 580px;
+      overflow: auto;
+
+    }
+
+    .serchOrder {
+      display: flex;
+    }
+
+    .serchOrder input {
+      margin-left: 15%;
+      margin-right: 1%;
+      font-size: 37px;
+      padding: 0px 20px;
+      border: 2px solid #24262D;
+      background-color: rgba(230, 230, 230, 0.651);
+      border-radius: 10px;
+      display: block;
+      height: 50px;
+      width: 50%;
+      outline: none;
+      transform: translateY(-15px);
+    }
+
+    ::placeholder {
+      color: rgba(19, 18, 18, 0.212);
+      font-size: 37px;
+    }
+
+
+    .serchOrder button {
+      font-size: 20px;
+      border: 2px solid #24262D;
+      border-radius: 10px;
+      display: block;
+      height: 54px;
+      width: 7%;
+      transform: translateY(-15px);
+    }
+
+    .serchOrder button:hover {
+      transition: 0.7s;
+      background-color: #FFCCDC;
+    }
+
+    .serchOrder button:active {
+      transition: 0.1s;
+      background-color: #d8aab6;
+      transform: translateY(-13px);
+    }
+
+    .titleList {
+      padding-top: 25px;
+      border-bottom: 1px solid #000;
+      padding-right: 130px;
+      padding-left: 10px;
+      display: flex;
+      justify-content: space-between;
+      background-color: rgba(255, 255, 255, 0.952);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 23px
+    }
+
+    .order {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #000;
+      display: flex;
+      justify-content: space-between;
+      background-color: rgba(255, 255, 255, 0.952);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 25px
+    }
+
+    .order.ocult {
+      display: none;
+    }
+
+    .loading {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 25%;
+      margin-right: 30%;
+
+    }
